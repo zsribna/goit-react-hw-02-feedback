@@ -1,57 +1,78 @@
-import React, {Component} from 'react';
-import FeedbackOptions from 'components/FeedbackOption/FeedbackOptions';
-import Statistics from 'components/Statistics/Statistics';
-import Section from 'components/Section/Section';
-import Notification from 'components/Notification/Notification';
+import { Component } from 'react';
+import Section from './Section';
+import FeedbackOptions from './FeedbackOptions';
+import Statistics from './Statistics';
+import Notification from './Notification';
 
-class App extends Component { 
+class App extends Component {
   state = {
     good: 0,
     neutral: 0,
     bad: 0,
   };
-  countTotalFeedback = () => {
-    const { good, neutral, bad } = this.state;
-    const sum = good + neutral + bad;
-    return sum;
-  };
-  countPositiveFeedbackPercentage = () => {
-    const { good } = this.state;
-    return Math.round((good * 100) / this.countTotalFeedback());
-  };
-  addReviewByClick = reviwe => {
-    this.setState(previous => {
-      return { [reviwe]: previous[reviwe] + 1 };
+
+  incrementCount = btnId => {
+    this.setState(prevState => {
+      return { [btnId]: prevState[btnId] + 1 };
     });
   };
+
+  countTotalFeedback = () => {
+    const keys = Object.keys(this.state);
+    return keys.reduce((acc, current) => acc + this.state[current], 0);
+  };
+
+  countPositiveFeedbackPercentage = () => {
+    if (this.countTotalFeedback() !== 0) {
+      return Math.round((this.state.good / this.countTotalFeedback()) * 100);
+    } else {
+      return 0;
+    }
+  };
+
   render() {
-    const options = Object.keys(this.state);
-    const totalFeedback = this.countTotalFeedback();
-    const positiveFeedback = this.countPositiveFeedbackPercentage();
-    const { good, neutral, bad } = this.state;
+    const {
+      state,
+      state: { good, neutral, bad },
+      incrementCount,
+      countTotalFeedback,
+      countPositiveFeedbackPercentage,
+    } = this;
+
+    const totalCount = countTotalFeedback();
+    const positivePercentage = countPositiveFeedbackPercentage();
 
     return (
-      <div>
-        <Section title="Please leave your feedback">
-          <FeedbackOptions
-            options={options}
-            onFeedback={this.addReviewByClick} />
-        </Section>
-        <Section title="Statistics">
-          {totalFeedback > 0 ? (<Statistics
-            good={good}
-            neutral={neutral}
-            bad={bad}
-            total={totalFeedback}
-            positivePerc={positiveFeedback} />
-          )
-            : (
-              <Notification message="No feedback" />
-            )}
-        </Section>
+      <div className="app">
+        <Section
+          title="Please leave feedback"
+          children={
+            <FeedbackOptions
+              options={Object.keys(state)}
+              onLeaveFeedbackClick={incrementCount}
+            />
+          }
+        />
+
+        <Section
+          title="Statistics"
+          children={
+            totalCount > 0 ? (
+              <Statistics
+                good={good}
+                neutral={neutral}
+                bad={bad}
+                total={totalCount}
+                positivePercentage={positivePercentage}
+              />
+            ) : (
+              <Notification message="There is no feedback" />
+            )
+          }
+        />
       </div>
     );
   }
-
 }
+
 export default App;

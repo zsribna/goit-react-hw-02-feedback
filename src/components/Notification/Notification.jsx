@@ -1,11 +1,11 @@
 import PropTypes from 'prop-types';
 
-function Notification({ message }) {
-    return <>{message}</>
-}
-
 export default Notification;
 
 Notification.propTypes = {
-    message: PropTypes.string.isRequired,
+  message: PropTypes.string.isRequired,
+};
+
+function Notification({ message }) {
+  return <p className="message">{message}</p>;
 }

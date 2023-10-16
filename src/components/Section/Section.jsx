@@ -1,15 +1,18 @@
 import PropTypes from 'prop-types';
-function Section({ children, title }) {
-    return (
-        <div>
-            <h2>{title}</h2>
-            {children}
-        </div>
-    )
-}
+import css from './Section.module.css';
+
 export default Section;
 
 Section.propTypes = {
-    title: PropTypes.string.isRequired,
-    children: PropTypes.element.isRequired,
+  title: PropTypes.string,
+  children: PropTypes.object,
+};
+
+function Section({ title, children }) {
+  return (
+    <section className={css.section}>
+      <h2>{title}</h2>
+      {children}
+    </section>
+  );
 }
