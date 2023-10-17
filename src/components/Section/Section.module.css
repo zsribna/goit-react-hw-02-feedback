@@ -1,6 +1,7 @@
-.section {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-  align-items: center;
+.section{
+
+    padding: 15px;
+}
+.title{
+    margin-bottom: 20px;
 }

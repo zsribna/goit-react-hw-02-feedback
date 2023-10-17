@@ -1,5 +1,10 @@
-.statistics {
-  display: flex;
-  flex-direction: column;
-  gap: 5px;
+.statisticsList{
+margin-bottom: 10px;
+}
+.listItems:last-child{
+    margin-bottom: 0;
+}
+.listItems{
+    
+margin-bottom: 8px;
 }

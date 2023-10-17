@@ -1,33 +1,21 @@
-import PropTypes from 'prop-types';
-import css from './FeedbackOptions.module.css';
 
-export default FeedbackOptions;
+import css from '../FeedbackOptions/FeedbackOptions.module.css'
+export const FeedbackOptions = ({ options, onLeaveFeedback }) => (
+<ul className={css.feedbackList}>
+  {options.map(name => {
+    return (
+      <li key={name}>
+        <button className={css.feedbackButton} type="button" name={name} onClick={() => onLeaveFeedback(name)}>
+          {name}
+        </button>
+      </li>
+    );
+  })}
+</ul>
+)
 
-FeedbackOptions.propTypes = {
-  options: PropTypes.array.isRequired,
-  onLeaveFeedback: PropTypes.func,
-};
 
-function FeedbackOptions({ options, onLeaveFeedbackClick }) {
-  return (
-    <ul className={css.feedback_buttons}>
-      {options.map(option => {
-        return (
-          <li key={option}>
-            <button
-              type="button"
-              className={css.btn}
-              onClick={() => onLeaveFeedbackClick(option)}
-            >
-              {uppercaseFirstLetter(option)}
-            </button>
-          </li>
-        );
-      })}
-    </ul>
-  );
-}
 
-function uppercaseFirstLetter(string) {
-  return string.charAt(0).toUpperCase() + string.slice(1);
-}
+// {
+//   option, onLeaveFeedback;
+// }

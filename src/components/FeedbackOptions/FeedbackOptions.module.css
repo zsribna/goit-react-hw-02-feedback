@@ -1,17 +1,21 @@
-.feedback_buttons {
-  display: flex;
-  gap: 10px;
+.feedbackList{
+    display: flex;
+  justify-content: flex-start; 
+    align-items: center;
+    gap: 15px;
 }
-
-.btn {
-  min-width: 80px;
-  padding: 5px 10px;
-  font-weight: bold;
-  border: none;
-  border-radius: 5px;
-  background-color: aqua;
+.feedbackButton{
+    padding: 10px;
+    text-align: center;
+    cursor: pointer;
+    transition: 0.5s;
+    background-size: 200% auto;
+    color: rgb(0, 0, 0);
+    box-shadow: 0 0 20px #eee;
+    border-radius: 10px;
+    border-color: transparent;
+    background-image: linear-gradient(to right, #c2cde6 0%, #a2a9b5 51%, #767d8b 100%);
 }
-
-.btn:hover {
-  background-color: aquamarine;
+.feedbackButton:hover {
+     background-position: right center;
 }
